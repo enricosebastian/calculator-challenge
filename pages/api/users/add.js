@@ -1,0 +1,17 @@
+import { addUser } from "@/lib/mongodb/users";
+
+const handler = async (req, res) => {
+    if (req.method === "GET") {
+        try {
+            const result = await addUser();
+            return res.status(200).json({result});
+        } catch (error) {
+            return res.status(500).json({error: error.message});
+        }
+    }
+
+    res.setHeader("Allow", ["GET"]);
+    res.status(405).end(`Method ${req.method} is not allowed`);
+}
+
+export default handler;
