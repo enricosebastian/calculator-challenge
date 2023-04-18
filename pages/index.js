@@ -2,10 +2,33 @@ import styles from '@/styles/Home.module.scss'
 import { useEffect } from 'react';
 
 export default function Home({data}) {
-  console.log(data);
+  const ipAddress = data.ipAddress;
+
+  const submitHistory = (event) => {
+    const input = document.getElementById("form__input__equation");
+    const equation = input.value;
+
+    event.preventDefault();
+
+    fetch('/api/calculator/insert', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ipAddress: ipAddress, equation: equation}),
+    });
+  }
 
   return (
-    <div>hello world</div>
+    <>
+      <form action="/api/calculator/insert" method="post">
+        <input id = "form__input__equation" type="text"/>
+        <button type="submit" onClick={submitHistory}>submit</button>
+      </form>
+      
+      <div>hello world</div>
+    </>
+    
   );
 }
 
