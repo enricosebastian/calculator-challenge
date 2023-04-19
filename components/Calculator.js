@@ -15,87 +15,87 @@ export default function Calculator() {
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__function}`}>
-                    b
+                    +/-
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__function}`}>
-                    b
+                    %
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__operator}`}>
-                    b
+                    ÷
                 </div>
 
                 {/*  */}
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    7
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    8
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    9
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__operator}`}>
-                    b
+                    ×
                 </div>
 
                 {/*  */}
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    4
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    5
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    6
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__operator}`}>
-                    b
+                    -
                 </div>
 
                 {/*  */}
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    1
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    2
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    3
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__operator}`}>
-                    b
+                    +
                 </div>
 
                 {/*  */}
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    .
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    0
                 </div>
 
                 <div className={styles.buttons__box__wrapper}>
-                    b
+                    c
                 </div>
 
                 <div className={`${styles.buttons__box__wrapper} ${styles.button__box__operator}`}>
-                    b
+                    =
                 </div>
 
                 {/*  */}
