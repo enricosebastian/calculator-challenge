@@ -1,8 +1,9 @@
 import styles from '@/styles/Home.module.scss'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function Home({data}) {
-  const ipAddress = data.ipAddress;
+export default function Home({ipAddress}) {
+
+  const [calculatorHistory, setCalculatorHistory] = useState([]);
 
   const submitHistory = (event) => {
     const input = document.getElementById("form__input__equation");
@@ -18,6 +19,22 @@ export default function Home({data}) {
       body: JSON.stringify({ipAddress: ipAddress, equation: equation}),
     });
   }
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/api/calculator/get', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ipAddress: ipAddress}),
+      });
+  
+      const jsonData = await response.json();
+      console.log(jsonData);
+    }
+    fetchData();
+  });
 
   return (
     <>
@@ -38,5 +55,5 @@ export async function getServerSideProps() {
   const data = await res.json();
 
   // Pass data to the page via props
-  return { props: { data: data } }
+  return { props: { ipAddress: data.ipAddress } }
 }
