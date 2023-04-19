@@ -1,5 +1,6 @@
 import Calculator from '@/components/Calculator';
 import styles from '@/styles/Home.module.scss'
+import Mexp from 'math-expression-evaluator';
 import { useEffect, useState } from 'react';
 
 export default function Home({ipAddress}) {
@@ -7,6 +8,9 @@ export default function Home({ipAddress}) {
   const [calculatorHistory, setCalculatorHistory] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [inputText, setInputText] = useState("");
+  const [equationText, setEquationText] = useState("");
+
+  const mexp = new Mexp();
 
   const submitHistory = (event) => {
     const input = document.getElementById("form__input__equation");
@@ -40,15 +44,21 @@ export default function Home({ipAddress}) {
 
   const onClickButton = (event) => {
     let buttonName = event.target.id;
-    if(buttonName == "") {
+
+    if(buttonName === "") {
       buttonName = event.target.innerText;
     }
 
-    console.log(buttonName);
-
     if(buttonName == "AC") {
       setInputText("");
-    } else {
+    } else if(buttonName == "=") {
+      setEquationText(inputText);
+
+      var lexed = mexp.lex(inputText.replace("×","*").replace("÷","/"));
+      var postfixed = mexp.toPostfix(lexed);  
+      var result = mexp.postfixEval(postfixed);  
+      setInputText(result);
+    }else {
       setInputText(prevValue => prevValue+buttonName);
     }
   }
@@ -94,6 +104,7 @@ export default function Home({ipAddress}) {
       <Calculator 
         onClickButton={onClickButton} 
         inputText={inputText}
+        equationText={equationText}
       />
     </div>
   );

@@ -1,11 +1,11 @@
 import React from "react";
 import styles from '@/styles/Home.module.scss'
 
-export default function Calculator({onClickButton, inputText}) {
+export default function Calculator({onClickButton, inputText, equationText}) {
     return (
         <div className={styles.calculator__body__wrapper}>
 
-            <div className={styles.calculator__equation__wrapper}>equation</div>
+            <div className={styles.calculator__equation__wrapper}>{equationText}</div>
             <div className={styles.calculator__input__wrapper}>{inputText}</div>
             <div className={styles.calculator__buttons__wrapper}>
 
