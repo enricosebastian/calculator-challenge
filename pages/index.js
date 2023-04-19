@@ -24,6 +24,18 @@ export default function Home({ipAddress}) {
     setHasSubmitted(true);
   }
 
+  const clearHistory = (event) => {
+    fetch('/api/calculator/deleteAll', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ipAddress: ipAddress}),
+    });
+
+    setHasSubmitted(true);
+  }
+
   useEffect(() => {
     if(hasSubmitted) setHasSubmitted(false);
 
@@ -42,7 +54,7 @@ export default function Home({ipAddress}) {
 
     fetchData();
   },[hasSubmitted]);
-  
+
   return (
     <>
       <form action="/api/calculator/insert" method="post">
@@ -53,8 +65,8 @@ export default function Home({ipAddress}) {
       <div>
         <ul>
           {calculatorHistory.map(history => <li key={history._id}>{history.equation}</li>)}
-
         </ul>
+        <button type="submit" onClick={clearHistory}>clear</button>
       </div>
     </>
     
