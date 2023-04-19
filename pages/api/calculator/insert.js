@@ -3,10 +3,14 @@ import { insert } from "@/lib/mongodb/calculator";
 const handler = async (req, res) => {
     if (req.method === "POST") {
         try {
-            console.log("Trying to post: ")
+            const ipAddress = req.body.ipAddress;
+            const equation = req.body.equation;
+
+            if(ipAddress == null || equation == null) throw new Error("The user address or equation entered is null");
+
             const data = {
-                ipAddress: req.body.ipAddress,
-                equation: req.body.equation,
+                ipAddress: ipAddress,
+                equation: equation,
             }
 
             const result = await insert(data);

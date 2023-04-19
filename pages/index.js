@@ -42,8 +42,7 @@ export default function Home({ipAddress}) {
 
     fetchData();
   },[hasSubmitted]);
-
-  console.log(calculatorHistory);
+  
   return (
     <>
       <form action="/api/calculator/insert" method="post">
