@@ -6,6 +6,7 @@ export default function Home({ipAddress}) {
 
   const [calculatorHistory, setCalculatorHistory] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [inputText, setInputText] = useState("");
 
   const submitHistory = (event) => {
     const input = document.getElementById("form__input__equation");
@@ -35,6 +36,17 @@ export default function Home({ipAddress}) {
     });
 
     setHasSubmitted(true);
+  }
+
+  const onClickButton = (event) => {
+    let buttonName = event.target.id;
+    if(buttonName == "") {
+      buttonName = event.target.innerText;
+    }
+
+    console.log(buttonName);
+
+    setInputText(prevValue => prevValue+buttonName);
   }
 
   useEffect(() => {
@@ -75,7 +87,10 @@ export default function Home({ipAddress}) {
 
   return (
     <div className={styles.wrapper}>
-      <Calculator/>
+      <Calculator 
+        onClickButton={onClickButton} 
+        inputText={inputText}
+      />
     </div>
   );
 }
