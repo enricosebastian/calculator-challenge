@@ -52,14 +52,29 @@ export default function Home({ipAddress}) {
     if(buttonName == "AC") {
       setInputText("");
       setEquationText("");
-    } else if(buttonName == "=") {
+    } else if(buttonName == "+/-") {
+      setEquationText(inputText);
+      let expression = inputText.replace("×","*").replace("÷","/");
+      let lexed = mexp.lex(expression);
+      let postfixed = mexp.toPostfix(lexed);  
+      let result = mexp.postfixEval(postfixed);
+
+      let isNegative = parseFloat(result) < 0;
+      console.log("result: "+result);
+      console.log("isNegative: "+ isNegative);
+      if(isNegative) 
+        setInputText(result);
+      else 
+        setInputText("-"+result);
+        
+    }else if(buttonName == "=") {
       setEquationText(inputText);
       let expression = inputText.replace("×","*").replace("÷","/");
       let lexed = mexp.lex(expression);
       let postfixed = mexp.toPostfix(lexed);  
       let result = mexp.postfixEval(postfixed);  
       setInputText(result);
-    }else {
+    } else {
       setInputText(prevValue => prevValue+buttonName);
     }
   }

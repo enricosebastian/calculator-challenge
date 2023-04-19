@@ -8,6 +8,26 @@
     padding-left: 700px;
     padding-right: 700px;
 
+    @media all and (max-width: 1800px) {
+        padding-left: 500px;
+        padding-right: 500px;
+    }
+
+    @media all and (max-width: 1400px) {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+
+    @media all and (max-width: 800px) {
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
+    @media all and (max-width: 600px) {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox */
     box-sizing: border-box;
@@ -102,6 +122,10 @@
                 .button__icon__svg {
                     height: 80px;
                     width: 80px;
+                    @media all and (max-width: 600px) {
+                        height: 50px;
+                        width: 50px;
+                    }
                     fill: $icon--white;
                 }
             }
