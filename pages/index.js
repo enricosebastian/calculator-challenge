@@ -31,11 +31,14 @@ export default function Home({ipAddress}) {
       });
   
       const jsonData = await response.json();
-      console.log(jsonData);
+      if(jsonData)
+        setCalculatorHistory(jsonData.calculatorHistory);
+      
     }
     fetchData();
-  });
+  },[]);
 
+  console.log(calculatorHistory);
   return (
     <>
       <form action="/api/calculator/insert" method="post">
@@ -43,7 +46,12 @@ export default function Home({ipAddress}) {
         <button type="submit" onClick={submitHistory}>submit</button>
       </form>
       
-      <div>hello world</div>
+      <div>
+        <ul>
+          {calculatorHistory.map(history => <li key={history._id}>{history.equation}</li>)}
+
+        </ul>
+      </div>
     </>
     
   );
