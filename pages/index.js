@@ -51,12 +51,13 @@ export default function Home({ipAddress}) {
 
     if(buttonName == "AC") {
       setInputText("");
+      setEquationText("");
     } else if(buttonName == "=") {
       setEquationText(inputText);
-
-      var lexed = mexp.lex(inputText.replace("×","*").replace("÷","/"));
-      var postfixed = mexp.toPostfix(lexed);  
-      var result = mexp.postfixEval(postfixed);  
+      let expression = inputText.replace("×","*").replace("÷","/");
+      let lexed = mexp.lex(expression);
+      let postfixed = mexp.toPostfix(lexed);  
+      let result = mexp.postfixEval(postfixed);  
       setInputText(result);
     }else {
       setInputText(prevValue => prevValue+buttonName);
