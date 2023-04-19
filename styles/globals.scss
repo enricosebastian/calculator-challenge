@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "colors";
 
 * { 
   padding: 0; 
@@ -9,6 +10,6 @@ html, body {
   min-width: 100%;
   min-height: 100%;
 
-  background-color: yellow;
+  background-color: $background--black;
   font-family: 'Inter', sans-serif;;
 }
