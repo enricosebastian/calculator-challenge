@@ -46,7 +46,11 @@ export default function Home({ipAddress}) {
 
     console.log(buttonName);
 
-    setInputText(prevValue => prevValue+buttonName);
+    if(buttonName == "AC") {
+      setInputText("");
+    } else {
+      setInputText(prevValue => prevValue+buttonName);
+    }
   }
 
   useEffect(() => {
