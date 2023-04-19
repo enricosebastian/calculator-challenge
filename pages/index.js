@@ -1,3 +1,4 @@
+import Calculator from '@/components/Calculator';
 import styles from '@/styles/Home.module.scss'
 import { useEffect, useState } from 'react';
 
@@ -55,21 +56,27 @@ export default function Home({ipAddress}) {
     fetchData();
   },[hasSubmitted]);
 
-  return (
-    <>
-      <form action="/api/calculator/insert" method="post">
-        <input id = "form__input__equation" type="text"/>
-        <button type="submit" onClick={submitHistory}>=</button>
-      </form>
+  // return (
+  //   <>
+  //     <form action="/api/calculator/insert" method="post">
+  //       <input id = "form__input__equation" type="text"/>
+  //       <button type="submit" onClick={submitHistory}>=</button>
+  //     </form>
       
-      <div>
-        <ul>
-          {calculatorHistory.map(history => <li key={history._id}>{history.equation}</li>)}
-        </ul>
-        <button type="submit" onClick={clearHistory}>clear</button>
-      </div>
-    </>
+  //     <div>
+  //       <ul>
+  //         {calculatorHistory.map(history => <li key={history._id}>{history.equation}</li>)}
+  //       </ul>
+  //       <button type="submit" onClick={clearHistory}>clear</button>
+  //     </div>
+  //   </>
     
+  // );
+
+  return (
+    <div className={styles.wrapper}>
+      <Calculator/>
+    </div>
   );
 }
 
