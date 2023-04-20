@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="./readme-images/front-page.jpg" height="300px"/>
+</p>
+
 This is a Next.js app integrated with MongoDB. This is based on the [template](https://github.com/enricosebastian/next-mongo) I did for the same tech stack.
 
 This was originally a challenge that was given to me for a job application, and decided to show it off as part of my full stack knowledge (creating the frontend+making sure an actual live database is in use)
