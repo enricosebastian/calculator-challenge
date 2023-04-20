@@ -1,7 +1,7 @@
 import Calculator from '@/components/Calculator';
 import styles from '@/styles/Home.module.scss'
 import Mexp from 'math-expression-evaluator';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home({ipAddress}) {
 
@@ -9,6 +9,7 @@ export default function Home({ipAddress}) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [inputText, setInputText] = useState("");
   const [equationText, setEquationText] = useState("");
+  const [previousValue, setPreviousValue] = useState("");
 
   const mexp = new Mexp();
 
@@ -55,39 +56,56 @@ export default function Home({ipAddress}) {
       setEquationText("");
     } else if(buttonName == "+" || buttonName == "-" || buttonName == "×" || buttonName == "÷") {
       button.classList.add(styles.is__clicked);
-      setEquationText(prevValue => prevValue+buttonName);
-    } else if(buttonName == "+/-") {
-      setEquationText(inputText);
-      let expression = inputText.replace("×","*").replace("÷","/");
-      let lexed = mexp.lex(expression);
-      let postfixed = mexp.toPostfix(lexed);  
-      let result = mexp.postfixEval(postfixed);
 
-      let isNegative = parseFloat(result) < 0;
-      console.log("result: "+result);
-      console.log("isNegative: "+ isNegative);
-      if(isNegative) 
-        setInputText(result);
-      else 
-        setInputText("-"+result);
+      if(equationText.includes(inputText)) {
+        setEquationText(prevValue => prevValue+buttonName);
+      } else {
+        setEquationText(inputText+buttonName);
+      }
+      
+    } else if(buttonName == "+/-") {
+      let isNegative = parseFloat(inputText) < 0;
+      setPreviousValue(inputText);
+
+      if (isNegative) {
+        // turn positive
+        setInputText(inputText.replace("-",""));
         
-    }else if(buttonName == "=") {
-      setEquationText(inputText);
-      let expression = inputText.replace("×","*").replace("÷","/");
+      } else {
+        // turn negative
+        setInputText("-"+inputText);
+      }
+        
+    } else if(buttonName == "=") {
+      let expression = equationText.replace("×","*").replace("÷","/");
       let lexed = mexp.lex(expression);
       let postfixed = mexp.toPostfix(lexed);  
       let result = mexp.postfixEval(postfixed);  
       setInputText(result);
     } else {
       let clickedButtons = document.getElementsByClassName(styles.is__clicked);
-      console.log(clickedButtons);
-      for(let i=0; i<clickedButtons.length; i++) {
-        clickedButtons[i].classList.remove(styles.is__clicked);
+      if(clickedButtons.length < 1) {
+        setEquationText(prevValue => prevValue+buttonName);
+        setInputText(prevValue => prevValue+buttonName);
+      } else {
+        for(let i=0; i<clickedButtons.length; i++) {
+          clickedButtons[i].classList.remove(styles.is__clicked);
+        }
+
+        setEquationText(prevValue => prevValue+buttonName);
+        setInputText(buttonName);
       }
-      setEquationText(prevValue => prevValue+buttonName);
-      setInputText(buttonName);
+      
     }
   }
+
+  useEffect(()=> {
+    if(equationText.includes(previousValue)) {
+      setEquationText(prevState => prevState.replace(previousValue, inputText));
+    } else {
+      setEquationText(inputText);
+    }
+  }, [previousValue]);
 
   useEffect(() => {
     if(hasSubmitted) setHasSubmitted(false);
