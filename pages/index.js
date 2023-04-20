@@ -43,6 +43,7 @@ export default function Home({ipAddress}) {
   }
 
   const onClickButton = (event) => {
+    let button = event.target;
     let buttonName = event.target.id;
 
     if(buttonName === "") {
@@ -52,6 +53,9 @@ export default function Home({ipAddress}) {
     if(buttonName == "AC") {
       setInputText("");
       setEquationText("");
+    } else if(buttonName == "+" || buttonName == "-" || buttonName == "×" || buttonName == "÷") {
+      button.classList.add(styles.is__clicked);
+      setEquationText(prevValue => prevValue+buttonName);
     } else if(buttonName == "+/-") {
       setEquationText(inputText);
       let expression = inputText.replace("×","*").replace("÷","/");
@@ -75,7 +79,13 @@ export default function Home({ipAddress}) {
       let result = mexp.postfixEval(postfixed);  
       setInputText(result);
     } else {
-      setInputText(prevValue => prevValue+buttonName);
+      let clickedButtons = document.getElementsByClassName(styles.is__clicked);
+      console.log(clickedButtons);
+      for(let i=0; i<clickedButtons.length; i++) {
+        clickedButtons[i].classList.remove(styles.is__clicked);
+      }
+      setEquationText(prevValue => prevValue+buttonName);
+      setInputText(buttonName);
     }
   }
 
