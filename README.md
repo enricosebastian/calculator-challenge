@@ -38,3 +38,10 @@ NODE_ENV --> developer
 API_URL --> http://localhost:3000
 ```
 8. Click deploy and check if you can access the URL.
+
+## Technologies used
+<!-- Badges acquired from: https://home.aveek.io/GitHub-Profile-Badges/ -->
+![Next.js](https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React.js](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)
+![Sass](https://img.shields.io/badge/Sass-CC6699.svg?style=for-the-badge&logo=Sass&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248.svg?style=for-the-badge&logo=MongoDB&logoColor=white)
