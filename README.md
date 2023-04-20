@@ -6,6 +6,8 @@ This is a Next.js app integrated with MongoDB. This is based on the [template](h
 
 This was originally a challenge that was given to me for a job application, and decided to show it off as part of my full stack knowledge (creating the frontend+making sure an actual live database is in use)
 
+You can also access it online via [this Vercel site](https://calculator-application-challenge.vercel.app/)
+
 ## How to run locally
 1. Clone the repository
 1. Go to the repo folder in your local computer and run `npm install` to get all the necessary node modules and libraries
