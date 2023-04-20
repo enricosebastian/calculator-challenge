@@ -57,7 +57,9 @@ export default function Home({ipAddress}) {
     } else if(buttonName == "+" || buttonName == "-" || buttonName == "×" || buttonName == "÷") {
       button.classList.add(styles.is__clicked);
 
-      if(equationText.includes(inputText)) {
+      if(equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) {
+        setEquationText(inputText+buttonName);
+      } else if(equationText.includes(inputText)) {
         setEquationText(prevValue => prevValue+buttonName);
       } else {
         setEquationText(inputText+buttonName);
@@ -77,7 +79,7 @@ export default function Home({ipAddress}) {
       }
         
     } else if(buttonName == "=") {
-      let expression = equationText.replace("×","*").replace("÷","/");
+      let expression = equationText.replaceAll("×","*").replaceAll("÷","/");
       let lexed = mexp.lex(expression);
       let postfixed = mexp.toPostfix(lexed);  
       let result = mexp.postfixEval(postfixed);  
