@@ -1,4 +1,5 @@
 import Calculator from '@/components/Calculator';
+import History from '@/components/History';
 import styles from '@/styles/Home.module.scss'
 import Mexp from 'math-expression-evaluator';
 import { useEffect, useRef, useState } from 'react';
@@ -10,6 +11,7 @@ export default function Home({ipAddress}) {
   const [inputText, setInputText] = useState("");
   const [equationText, setEquationText] = useState("");
   const [previousValue, setPreviousValue] = useState("");
+  const [isHistoryPage, setIsHistoryPage] = useState(false);
 
   const mexp = new Mexp();
 
@@ -43,6 +45,10 @@ export default function Home({ipAddress}) {
     setHasSubmitted(true);
   }
 
+  const closeHistoryPage = () => {
+    setIsHistoryPage(false);
+  }
+
   const onClickButton = (event) => {
     let button = event.target;
     let buttonName = event.target.id;
@@ -69,6 +75,8 @@ export default function Home({ipAddress}) {
         setEquationText(inputText+buttonName);
       }
       
+    } else if(buttonName === "history") {
+      setIsHistoryPage(true);
     } else if(buttonName == "+/-") {
       let isNegative = parseFloat(inputText) < 0;
       setPreviousValue(inputText);
@@ -156,11 +164,15 @@ export default function Home({ipAddress}) {
 
   return (
     <div className={styles.wrapper}>
-      <Calculator 
-        onClickButton={onClickButton} 
-        inputText={inputText}
-        equationText={equationText}
-      />
+      {
+        (isHistoryPage)?
+        <History closeHistoryPage={closeHistoryPage}/> :
+        <Calculator 
+          onClickButton={onClickButton} 
+          inputText={inputText}
+          equationText={equationText}
+        />
+      }
     </div>
   );
 }
