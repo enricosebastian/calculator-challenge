@@ -60,7 +60,11 @@ export default function Home({ipAddress}) {
       if(equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) {
         setEquationText(inputText+buttonName);
       } else if(equationText.includes(inputText)) {
-        setEquationText(prevValue => prevValue+buttonName);
+        if(equationText.length >= 1) {
+          setEquationText(prevValue => prevValue+buttonName);
+        } else {
+          button.classList.remove(styles.is__clicked);
+        }
       } else {
         setEquationText(inputText+buttonName);
       }
@@ -87,8 +91,13 @@ export default function Home({ipAddress}) {
     } else {
       let clickedButtons = document.getElementsByClassName(styles.is__clicked);
       if(clickedButtons.length < 1) {
-        setEquationText(prevValue => prevValue+buttonName);
-        setInputText(prevValue => prevValue+buttonName);
+        if(equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) {
+          setEquationText(buttonName);
+          setInputText(buttonName);
+        } else {
+          setEquationText(prevValue => prevValue+buttonName);
+          setInputText(prevValue => prevValue+buttonName);
+        }
       } else {
         for(let i=0; i<clickedButtons.length; i++) {
           clickedButtons[i].classList.remove(styles.is__clicked);
