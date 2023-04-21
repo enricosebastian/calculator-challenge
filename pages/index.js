@@ -12,6 +12,7 @@ export default function Home({ipAddress}) {
   const [equationText, setEquationText] = useState("");
   const [previousValue, setPreviousValue] = useState("");
   const [isHistoryPage, setIsHistoryPage] = useState(false);
+  const [wasSolved, setWasSolved] = useState(false);
 
   const mexp = new Mexp();
 
@@ -96,6 +97,7 @@ export default function Home({ipAddress}) {
       let postfixed = mexp.toPostfix(lexed);  
       let result = mexp.postfixEval(postfixed);  
       setInputText(result);
+      setWasSolved(true);
     } else {
       let clickedButtons = document.getElementsByClassName(styles.is__clicked);
       if(clickedButtons.length < 1) {
@@ -103,8 +105,13 @@ export default function Home({ipAddress}) {
           setEquationText(buttonName);
           setInputText(buttonName);
         } else {
-          setEquationText(prevValue => prevValue+buttonName);
-          setInputText(prevValue => prevValue+buttonName);
+          if (wasSolved) {
+            setEquationText("");
+            setInputText(buttonName);
+          } else {
+            setEquationText(prevValue => prevValue+buttonName);
+            setInputText(prevValue => prevValue+buttonName);
+          }
         }
       } else {
         for(let i=0; i<clickedButtons.length; i++) {
