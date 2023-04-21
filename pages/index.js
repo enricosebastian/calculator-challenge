@@ -99,7 +99,7 @@ export default function Home({ipAddress}) {
     } else {
       let clickedButtons = document.getElementsByClassName(styles.is__clicked);
       if(clickedButtons.length < 1) {
-        if(equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) {
+        if((equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) && inputText.length < 1) {
           setEquationText(buttonName);
           setInputText(buttonName);
         } else {
