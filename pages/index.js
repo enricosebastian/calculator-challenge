@@ -61,8 +61,16 @@ export default function Home({ipAddress}) {
     if(buttonName == "AC") {
       setInputText("");
       setEquationText("");
+      setWasSolved(false);
+
+      let clickedButtons = document.getElementsByClassName(styles.is__clicked);
+
+      for(let i=0; i<clickedButtons.length; i++) {
+        clickedButtons[i].classList.remove(styles.is__clicked);
+      }
     } else if(buttonName == "+" || buttonName == "-" || buttonName == "×" || buttonName == "÷") {
       button.classList.add(styles.is__clicked);
+      setWasSolved(false);
 
       if(equationText.includes("+") || equationText.includes("-") || equationText.includes("×") || equationText.includes("÷")) {
         setEquationText(inputText+buttonName);
@@ -108,6 +116,7 @@ export default function Home({ipAddress}) {
           if (wasSolved) {
             setEquationText("");
             setInputText(buttonName);
+            setWasSolved(false);
           } else {
             setEquationText(prevValue => prevValue+buttonName);
             setInputText(prevValue => prevValue+buttonName);
