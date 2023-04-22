@@ -68,6 +68,10 @@ export default function Home({ipAddress}) {
       for(let i=0; i<clickedButtons.length; i++) {
         clickedButtons[i].classList.remove(styles.is__clicked);
       }
+    } else if(buttonName === "%") {
+      const floatInputText = parseFloat(inputText)*.01;
+      setEquationText(prevEquationText => prevEquationText.replace(inputText, floatInputText));
+      setInputText(floatInputText);
     } else if(buttonName == "+" || buttonName == "-" || buttonName == "×" || buttonName == "÷") {
       button.classList.add(styles.is__clicked);
       setWasSolved(false);
