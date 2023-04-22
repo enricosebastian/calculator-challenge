@@ -16,13 +16,7 @@ export default function Home({ipAddress}) {
 
   const mexp = new Mexp();
 
-  const submitHistory = (event) => {
-    const input = document.getElementById("form__input__equation");
-    const equation = input.value;
-    input.value = "";
-
-    event.preventDefault();
-
+  function submitEquation(equation) {
     fetch('/api/calculator/insert', {
       method: 'POST',
       headers: {
@@ -89,6 +83,7 @@ export default function Home({ipAddress}) {
       }
       
     } else if(buttonName === "history") {
+
       setIsHistoryPage(true);
     } else if(buttonName == "+/-") {
       let isNegative = parseFloat(inputText) < 0;
@@ -104,6 +99,7 @@ export default function Home({ipAddress}) {
       }
         
     } else if(buttonName == "=") {
+      submitEquation(equationText);
       let expression = equationText.replaceAll("×","*").replaceAll("÷","/");
       let lexed = mexp.lex(expression);
       let postfixed = mexp.toPostfix(lexed);  
@@ -165,28 +161,11 @@ export default function Home({ipAddress}) {
     fetchData();
   },[hasSubmitted]);
 
-  // return (
-  //   <>
-  //     <form action="/api/calculator/insert" method="post">
-  //       <input id = "form__input__equation" type="text"/>
-  //       <button type="submit" onClick={submitHistory}>=</button>
-  //     </form>
-      
-  //     <div>
-  //       <ul>
-  //         {calculatorHistory.map(history => <li key={history._id}>{history.equation}</li>)}
-  //       </ul>
-  //       <button type="submit" onClick={clearHistory}>clear</button>
-  //     </div>
-  //   </>
-    
-  // );
-
   return (
     <div className={styles.wrapper}>
       {
         (isHistoryPage)?
-        <History closeHistoryPage={closeHistoryPage}/> :
+        <History calculatorHistory={calculatorHistory} closeHistoryPage={closeHistoryPage}/> :
         <Calculator 
           onClickButton={onClickButton} 
           inputText={inputText}

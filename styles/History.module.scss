@@ -63,7 +63,25 @@
 
     .calculator__history__wrapper {
         background-color: $body--light--gray;
-        padding-left: 20px;
         border-radius: 20px;
+        font-size: 25px;
+
+        height: auto;
+
+        .history__entry__wrapper {
+            color: $font--primary;
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+
+            border-bottom-style: solid;
+            border-bottom-color: $body--blue;
+            border-bottom-width: 1px;
+
+            -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;    /* Firefox */
+            box-sizing: border-box;
+        }
     }
 }

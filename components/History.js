@@ -1,7 +1,31 @@
 import React from "react";
 import styles from '@/styles/History.module.scss'
 
-export default function History({closeHistoryPage}) {
+import Mexp from 'math-expression-evaluator';
+
+export default function History({calculatorHistory, closeHistoryPage}) {
+
+    const mexp = new Mexp();
+
+    const historyList = calculatorHistory.map(history => {
+
+        let expression = history.equation.replaceAll("×","*").replaceAll("÷","/");
+        let lexed = mexp.lex(expression);
+        let postfixed = mexp.toPostfix(lexed);  
+        let result = mexp.postfixEval(postfixed);  
+
+        return (
+        <div key={history._id} className={styles.history__entry__wrapper}>
+            <div className={styles.history__equation__wrapper}>
+                {history.equation}
+            </div>
+            <div className={styles.history__solution__wrapper}>
+                = {result}
+            </div>
+        </div>
+        );
+    });
+    
     return(
         <div className={styles.calculator__body__wrapper}>
 
@@ -17,7 +41,7 @@ export default function History({closeHistoryPage}) {
                 </div>
             </div>
             <div className={styles.calculator__history__wrapper}>
-                history
+                {historyList}
             </div>
         </div>
 
